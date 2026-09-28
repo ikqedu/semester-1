@@ -11,15 +11,15 @@ You can complete this task on the worksheet pdf if you prefer.
 |     Command                 |     Explanation    |
 |-----------------------------|--------------------|
 |     pwd                     | shows the current location of the terminal |
-|     ls                      | |
-|     cd directory_name       | |
-|     cd ..                   | |
-|     cd -                    | |
-|     mkdir directory_name    | |
-|     touch filename          | |
-|     git status              | |
-|     git add -A              | |
-|     git commit -m ""        | |
-|     git push                | |
-|     git pull                | |
+|     ls                      | lists all the files & sub-directories in the current directory
+|     cd directory_name       | change the current directory to directory_name
+|     cd ..                   | change the current directory to the current directory's parent directory
+|     cd -                    | change the current directory to the most recent directory 
+|     mkdir directory_name    | make a directory called directory_name
+|     git status              | see general info about git: current branch, staged & unstaged changes, etc.
+|     touch filename          | create a file called filename
+|     git add -A              | stage all modified files in git
+|     git commit -m ""        | commit all staged files with some message (in this case, empty)
+|     git push                | upload local changes to remote
+|     git pull                | download remote changes to local
 
