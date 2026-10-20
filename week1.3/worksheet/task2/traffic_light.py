@@ -21,6 +21,9 @@ def output_states(colour_timings: dict[str, int], maxtime: int) -> None:
     if maxtime < 0:
         raise ValueError("Maxtime must be >= 0")
 
+    if any(dur <= 0 for dur in colour_timings.values()):
+        raise ValueError("Colour durations must be positive.")
+
     # Since Python 3.7+, this should construct deterministically
     # Cheap, does not need good memory scaling bc small, fixed state set
     colours = list(colour_timings)
@@ -35,7 +38,7 @@ def output_states(colour_timings: dict[str, int], maxtime: int) -> None:
 
         if colour_rem_time < 1:
             # Do mod operation in ptr instead of access
-            # to prevent (theoretical) state_ptr overflow
+            # to prevent (theoretical) overflow
             colour_ptr = (colour_ptr + 1) % colour_count
             cur_colour = colours[colour_ptr]
             colour_rem_time = colour_timings[cur_colour]
