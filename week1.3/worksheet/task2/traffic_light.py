@@ -9,7 +9,6 @@ states = {"red": 4, "red_amber": 3, "green": 5, "amber": 3}
 systime = 0
 maxtime = int(input())  # read an integer number of steps (>0)
 
-state = "red"
 
 # Simulate the traffic light system up to time=maxtime in 1-second steps
 
@@ -34,24 +33,32 @@ while systime < maxtime:
     
 """
 
-# Since Python 3.7+, this should construct deterministically
-# Cheap, does not need good memory scaling bc small, fixed state set
-colours = list(states.keys())
-state_ptr = 0
-state_count = len(states)
 
-# maxtime + 1 because maxtime is not # of timesteps
-while systime < maxtime + 1:
-    # Reset state, rem time
-    state = colours[state_ptr]
+def output_states(states: dict[str, int], maxtime: int) -> None:
+
+    # Since Python 3.7+, this should construct deterministically
+    # Cheap, does not need good memory scaling bc small, fixed state set
+    colours = list(states.keys())
+    state_ptr = 0
+    state_count = len(states)
+    state = "red"
+    systime = 0
+
     state_rem_time = states[state]
-
-    # Dual call is suboptimal
-    while state_rem_time > 0 and systime < maxtime + 1:
+    while systime < maxtime + 1:
         print(f"Time {systime:03} State {state}")
         state_rem_time -= 1
         systime += 1
 
-    state_ptr = (state_ptr + 1) % state_count
+        # Change state and reset time when fulfilled
+        if state_rem_time < 1:
+            # Do mod operation in ptr instead of access
+            # to prevent state_ptr overflow
+            state_ptr = (state_ptr + 1) % state_count
+            state = colours[state_ptr]
+            state_rem_time = states[state]
+
+
+output_states(states, maxtime)
 
 # At the end of each step you should output the time and state using the statement on line 14
