@@ -13,25 +13,29 @@ maxtime = int(input())  # read an integer number of steps (>0)
 
 
 def output_states(colour_timings: dict[str, int], maxtime: int) -> None:
+    """Print time and state from 0 to maxtime (inclusive)."""
+
+    if not colour_timings:
+        raise ValueError("Colour timings must be passed in.")
+
+    if maxtime < 0:
+        raise ValueError("Maxtime must be >= 0")
 
     # Since Python 3.7+, this should construct deterministically
     # Cheap, does not need good memory scaling bc small, fixed state set
-    colours = list(colour_timings.keys())
+    colours = list(colour_timings)
     colour_ptr = 0
     colour_count = len(colour_timings)
-    cur_colour = "red"
-    systime = 0
+    cur_colour = colours[colour_ptr]
 
     colour_rem_time = colour_timings[cur_colour]
-    while systime < maxtime + 1:
+    for systime in range(maxtime + 1):
         print(f"Time {systime:03} State {cur_colour}")
         colour_rem_time -= 1
-        systime += 1
 
-        # Change state and reset time when fulfilled
         if colour_rem_time < 1:
             # Do mod operation in ptr instead of access
-            # to prevent state_ptr overflow
+            # to prevent (theoretical) state_ptr overflow
             colour_ptr = (colour_ptr + 1) % colour_count
             cur_colour = colours[colour_ptr]
             colour_rem_time = colour_timings[cur_colour]
