@@ -29,12 +29,24 @@ class Rectangle:
         self.height = height
 
     def is_square(self) -> bool:
+        """
+        Check if square.
+        """
+
         return self.height == self.width
 
     def area(self) -> int:
+        """
+        Return area.
+        """
+
         return self.height * self.width
 
     def perimeter(self) -> int:
+        """
+        Return perimeter.
+        """
+
         return 2 * self.height + 2 * self.width
 
     # Implement methods is_square(), area() & perimeter() here
