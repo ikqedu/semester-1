@@ -1,6 +1,8 @@
-import pytest
-from person import Person
 from datetime import date
+
+import pytest
+
+from person import Person
 
 
 def test_types():
