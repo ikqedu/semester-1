@@ -19,10 +19,10 @@ class Rectangle:
         if type(height) is not int:
             raise TypeError("Height must be an integer.")
 
-        if width < 0:
+        if width <= 0:
             raise ValueError("Width must be non-negative.")
 
-        if height < 0:
+        if height <= 0:
             raise ValueError("Height must be non-negative.")
 
         self.width = width

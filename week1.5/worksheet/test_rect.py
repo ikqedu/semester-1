@@ -1,19 +1,20 @@
 import pytest
-
 from rect import Rectangle
 
+NEG_DIMS = [[-1, 1], [1, -1], [0, 1], [1, 0]]
 
-def test_negativity():
+
+@pytest.mark.parametrize("height,width", NEG_DIMS)
+def test_negativity(height, width):
+
     with pytest.raises(ValueError):
-        my_rect = Rectangle(height=-1, width=1)
-
-    with pytest.raises(ValueError):
-        my_rect = Rectangle(height=1, width=-1)
+        Rectangle(height, width)
 
 
-def test_non_int():
+NON_INT_DIMS = [["foo", 3], [3, "foo"]]
+
+
+@pytest.mark.parametrize("height,width", NON_INT_DIMS)
+def test_non_int(height, width):
     with pytest.raises(TypeError):
-        my_rect = Rectangle(height="foo", width=3)
-
-    with pytest.raises(TypeError):
-        my_rect = Rectangle(height=3, width="foo")
+        Rectangle(height, width)
