@@ -15,6 +15,7 @@ class Person:
     # (see README.md for further details)
 
     def __init__(self, name: str, birth: date) -> None:
+        """Names must be non-empty."""
 
         if type(name) is not str:
             raise TypeError("Name must be a string.")
