@@ -3,10 +3,25 @@
 # You are going to write a very simple program:
 
 # Ask a user to enter two numbers (one per input)
+num1 = input()
+
+try:
+    num1 = int(num1)
+except ValueError:
+    print("That is not a number")
+    exit()
+
+num2 = input()
+try:
+    num2 = int(num2)
+except ValueError:
+    print("That is not a number")
+    exit()
 
 # multiply those numbers together
 
 # print out the result
+print(num1 * num2)
 
 # There is an extra point available for validating that they entered numbers!
 # Add to your code so that if they entered something other than an integer it prints
